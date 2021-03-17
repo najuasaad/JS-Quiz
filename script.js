@@ -5,11 +5,12 @@ let questionindex = 0;
 let score = 0;
 //question array
 
-var highScores = localStorage.getItem("score");
+let highScores = [];
 
 if (isNaN(localStorage.getItem("score"))) {
     localStorage.setItem("score",0);
 }
+
 
 
 
@@ -65,6 +66,16 @@ const quizQuestions = [
     }
 ];
 
+const saveInitials = () => {
+    //put savedInitials and score into variable highScores
+    let savedInitials = document.querySelector("#initials").value
+    //make variable for a string of ?:::jasd;fja;se
+    localStorage.setItem("initials", savedInitials)
+    localStorage.setItem("score", score)
+
+
+}
+
 const endQuiz = () => {
     //hide first question container
     document.querySelector("#questions").classList.add("hide");
@@ -105,7 +116,7 @@ const loadQuestion = () => {
     //store the target question
     const currentQuestion = quizQuestions[questionindex];
 
-    //create questions marku in a string form
+    //create questions markup in a string form
     const questionMarkUp = `
         <h2 id="question-title">${currentQuestion.question}</h2>
         <div id="choices" class="choices">
@@ -154,7 +165,8 @@ const startQuiz = () => {
 //on click start game button
 document.querySelector("#start").addEventListener("click",startQuiz);
 
-
+// //on click saves initials
+document.querySelector("#submit").addEventListener("click,saveInitials")
 
 
 
